@@ -1,0 +1,40 @@
+<project>
+	
+	<property file="build.properties" />
+	
+
+	<path id="compile.classpath">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile">
+		<javac destdir="WebContent/WEB-INF/classes" debug="true" srcdir="src">
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+
+	<target name="war" depends="compile">
+		<war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent" />
+			<lib dir="WebContent/WEB-INF/lib" />
+			<classes dir="WebContent/WEB-INF/classes" />
+		</war>
+	</target>
+
+	
+	
+		<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+	
+	<target name="undeploy" depends="war">
+		<undeploy failonerror="no" url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" />
+	</target>
+	
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
+
+	<target name="deploy" depends="undeploy">
+		<deploy url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" war="dist/AntExample.war" />
+	</target>
+
+</project>
