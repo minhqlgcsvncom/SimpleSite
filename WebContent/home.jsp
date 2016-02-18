@@ -7,6 +7,6 @@
 <title>A simple site</title>
 </head>
 <body>
-....Welcome back to my new site....
+....Welcome back to my new site....com
 </body>
 </html>
