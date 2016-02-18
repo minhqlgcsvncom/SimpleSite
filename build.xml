@@ -28,7 +28,7 @@
 		<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
 
 	<target name="undeploy" depends="war">
-		<undeploy failonerror="no" url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" failonerror="true" />
+		<undeploy failonerror="no" url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" />
 	</target>
 	
 	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
