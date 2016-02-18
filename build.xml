@@ -30,7 +30,7 @@
 	
 	<!-- undeploy does not need failonerror, because there is a case, when the app is deployed for a first time, there is nothing to be undeployed. If we set failonerror on the first time => nothing to undeploy, ant can not build -->
 	<target name="undeploy" depends="war">
-		<undeploy failonerror="no" url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" />
+		<undeploy failonerror="no" url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" failonerror="true" />
 	</target>
 	
 	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
