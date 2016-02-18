@@ -15,8 +15,9 @@
 		</javac>
 	</target>
 
-	<target name="war" depends="compile">
-		<war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml">
+	<!-- failonerror - if fails, stop immediately -->
+	<target name="war" depends="compile" >
+		<war destfile="dist/AntExample.war" webxml="WebContent/WEB-INF/web.xml" failonerror="true">
 			<fileset dir="WebContent" />
 			<lib dir="WebContent/WEB-INF/lib" />
 			<classes dir="WebContent/WEB-INF/classes" />
@@ -27,14 +28,16 @@
 	
 		<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
 	
+	<!-- undeploy does not need failonerror, because there is a case, when the app is deployed for a first time, there is nothing to be undeployed. If we set failonerror on the first time => nothing to undeploy, ant can not build -->
 	<target name="undeploy" depends="war">
 		<undeploy failonerror="no" url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" />
 	</target>
 	
 	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" />
 
-	<target name="deploy" depends="undeploy">
-		<deploy url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" war="dist/AntExample.war" />
+	<!-- failonerror - if fails, stop immediately -->
+	<target name="deploy" depends="undeploy"  >
+		<deploy url="${tomcat-manager-url}" username="${tomcat-manager-username}" password="${tomcat-manager-password}" path="/SimpleSite" war="dist/AntExample.war" failonerror="true"/>
 	</target>
 
 </project>
