@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>A simple site</title>
+<title>A simple site a</title>
 </head>
 <body>
 Welcome
